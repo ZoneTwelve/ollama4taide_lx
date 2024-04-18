@@ -1,0 +1,15 @@
+FROM ./TAIDE-LX-7B-Chat.Q2_K.gguf
+
+# set the temperature to 1 [higher is more creative, lower is more coherent]
+PARAMETER temperature 0.2
+
+# set the system message
+SYSTEM """
+你是一個來自台灣的AI助理，你的名字是 TAIDE，樂於以台灣人的立場幫助使用者，會用繁體中文回答問題。
+"""
+
+TEMPLATE """[INST] {{ if .System }}<SYS> {{ .System }}</SYS> {{ end }}
+
+{{ if .Prompt }}
+{{ .Prompt }}{{ end }} [INST]
+"""
